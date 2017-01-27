@@ -19,6 +19,7 @@ the_future = maya.when(the_future_str).datetime()
 now = maya.now().datetime()
 
 days_in = (now - the_past).days
+days_left = (the_future - now).days
 total_days = (the_future - the_past).days
 
 messages = [
@@ -29,6 +30,9 @@ messages = [
     "Day {} of {}".format(
         humanize.intcomma(days_in),
         humanize.intcomma(total_days),
+    ),
+    "Only {} days left!".format(
+        humanize.intcomma(days_left),
     ),
 ]
 
