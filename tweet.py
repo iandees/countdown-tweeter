@@ -38,7 +38,7 @@ messages = [
         humanize.intcomma(days_left),
     ),
     u"Loading…\n{}\n{:0.1f}% complete".format(
-        progress_bar(float(days_in) / total_days, 36),
+        progress_bar(float(days_in) / total_days, 30),
         (float(days_in) / total_days) * 100.0,
     )
 ]
