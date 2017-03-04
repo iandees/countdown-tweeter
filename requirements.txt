@@ -8,6 +8,7 @@ maya==0.1.5
 oauthlib==2.0.1
 python-dateutil==2.6.0
 pytz==2016.10
+redis==2.10.5
 regex==2017.1.17
 requests==2.12.5
 requests-oauthlib==0.7.0
