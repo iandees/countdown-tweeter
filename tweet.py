@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 import maya
 import os
 import humanize
 import tweepy
 import random
+from progress_bar import progress_bar
 
 import logging
 import sys
@@ -32,17 +34,13 @@ days_left = (the_future - now).days
 total_days = (the_future - the_past).days
 
 messages = [
-    "{} of {} days".format(
-        humanize.ordinal(days_in),
-        humanize.intcomma(total_days),
-    ),
-    "Day {} of {}".format(
-        humanize.intcomma(days_in),
-        humanize.intcomma(total_days),
-    ),
-    "Only {} days left!".format(
+    u"Only {} days left!".format(
         humanize.intcomma(days_left),
     ),
+    u"{}\n{:0.1f}% complete".format(
+        progress_bar(float(days_in) / total_days, 40),
+        (float(days_in) / total_days) * 100.0,
+    )
 ]
 
 message = random.choice(messages)
