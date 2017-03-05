@@ -56,7 +56,7 @@ else:
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
-    status = api.update_status(message, previous_tweet_id=previous_tweet_id)
+    status = api.update_status(message, in_reply_to_status_id=previous_tweet_id)
     if redis:
         redis.set(redis_previous_tweet_id_key, status.id)
     logging.info("Tweeted for real (status %s, reply to %s): %s",
