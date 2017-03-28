@@ -34,10 +34,10 @@ days_left = (the_future - now).days
 total_days = (the_future - the_past).days
 
 messages = [
-    u"Only {} days left!".format(
+    u"Only {} days of Trump left!".format(
         humanize.intcomma(days_left),
     ),
-    u"Loading…\n{}\n{:0.1f}% complete".format(
+    u"Loading new president…\n{}\n{:0.1f}% complete".format(
         progress_bar(float(days_in) / total_days, 30),
         (float(days_in) / total_days) * 100.0,
     )
