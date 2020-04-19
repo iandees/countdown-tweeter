@@ -34,7 +34,8 @@ days_left = (the_future - now).days
 total_days = (the_future - the_past).days
 
 messages = [
-    u"Only {} days of Trump left!".format(
+    u"Today is {}. Only {} days of Trump left!".format(
+        now.strftime("%A"),
         humanize.intcomma(days_left),
     ),
     u"Loading new president…\n{}\n{:0.1f}% complete".format(
