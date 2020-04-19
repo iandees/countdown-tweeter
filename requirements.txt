@@ -10,7 +10,7 @@ python-dateutil==2.6.0
 pytz==2016.10
 redis==2.10.5
 regex==2017.1.17
-requests==2.12.5
+requests==2.20.0
 requests-oauthlib==0.7.0
 ruamel.ordereddict==0.4.9
 ruamel.yaml==0.13.9
