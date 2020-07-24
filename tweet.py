@@ -27,16 +27,30 @@ the_past = maya.when(the_past_str).datetime()
 the_future_str = os.environ.get('FUTURE_DATETIME')
 the_future = maya.when(the_future_str).datetime()
 
+vote_day = maya.when("2020-11-03T14:00Z").datetime()
+census_day = maya.when("2020-04-01T14:00Z").datetime()
+
 now = maya.now().datetime()
 
 days_in = (now - the_past).days
 days_left = (the_future - now).days
 total_days = (the_future - the_past).days
+days_left_vote = (vote_day - now).days
+days_ago_census = (now - census_day).days
 
 messages = [
     u"Today is {}. Only {} days of Trump left!".format(
         now.strftime("%A"),
         humanize.intcomma(days_left),
+    ),
+    u"Only {} days until election day! Make sure you're registered to vote: https://www.vote.org/register-to-vote/".format(
+        humanize.intcomma(days_left_vote),
+    ),
+    u"There are {} days until election day, but don't wait until then. Check to see if you can vote by mail! https://www.vote.org/absentee-ballot/".format(
+        humanize.intcomma(days_left_vote),
+    ),
+    u"It's been {} days since Census Day. Have you filled out your Census form yet? https://my2020census.gov/".format(
+        humanize.intcomma(days_ago_census),
     ),
     u"Loading new president…\n{}\n{:0.1f}% complete".format(
         progress_bar(float(days_in) / total_days, 30),
