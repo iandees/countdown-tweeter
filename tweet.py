@@ -36,7 +36,6 @@ days_in = (now - the_past).days
 days_left = (the_future - now).days
 total_days = (the_future - the_past).days
 days_left_vote = (vote_day - now).days
-days_ago_census = (now - census_day).days
 
 messages = [
     u"Today is {}. Only {} days of Trump left!".format(
@@ -48,9 +47,6 @@ messages = [
     ),
     u"There are {} days until election day, but don't wait until then. Check to see if you can vote by mail! https://www.vote.org/absentee-ballot/".format(
         humanize.intcomma(days_left_vote),
-    ),
-    u"It's been {} days since Census Day. Have you filled out your Census form yet? https://my2020census.gov/".format(
-        humanize.intcomma(days_ago_census),
     ),
     u"Loading new president…\n{}\n{:0.1f}% complete".format(
         progress_bar(float(days_in) / total_days, 30),
