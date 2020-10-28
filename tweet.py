@@ -45,7 +45,7 @@ messages = [
     u"Only {} days until election day! Make sure you're registered to vote: https://www.vote.org/register-to-vote/".format(
         humanize.intcomma(days_left_vote),
     ),
-    u"There are {} days until election day, but don't wait until then. Check to see if you can vote by mail! https://www.vote.org/absentee-ballot/".format(
+    u"There are {} days until election day, but don't wait until then. Vote early! https://www.vote.org/early-voting-calendar/".format(
         humanize.intcomma(days_left_vote),
     ),
     u"Loading new president…\n{}\n{:0.1f}% complete".format(
