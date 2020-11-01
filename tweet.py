@@ -21,36 +21,36 @@ if redis_url:
     redis = redis.from_url(redis_url)
     previous_tweet_id = redis.get(redis_previous_tweet_id_key)
 
-the_past_str = os.environ.get('PAST_DATETIME')
-the_past = maya.when(the_past_str).datetime()
-
-the_future_str = os.environ.get('FUTURE_DATETIME')
-the_future = maya.when(the_future_str).datetime()
-
+inauguration_2017 = maya.when("2017-01-20T12:00-05:00").datetime()
+inauguration_2021 = maya.when("2021-01-20T12:00-05:00").datetime()
 vote_day = maya.when("2020-11-03T14:00Z").datetime()
-census_day = maya.when("2020-04-01T14:00Z").datetime()
 
+seconds_in_hour = (60 * 60)
+seconds_in_day = (24 * seconds_in_hour)
 now = maya.now().datetime()
 
-days_in = (now - the_past).days
-days_left = (the_future - now).days
-total_days = (the_future - the_past).days
-days_left_vote = (vote_day - now).days
+days_in = (now - inauguration_2017).total_seconds() / seconds_in_day
+days_left = (inauguration_2021 - now).total_seconds() / seconds_in_day
+total_days = (inauguration_2021 - inauguration_2017).total_seconds() / seconds_in_day
+hours_left_vote = round((vote_day - now).total_seconds() / seconds_in_hour)
 
 messages = [
-    u"Today is {}. Only {} days of Trump left!".format(
+    u"Today is {}. Only {} day{} of Trump left!".format(
         now.strftime("%A"),
-        humanize.intcomma(days_left),
+        humanize.intcomma(round(days_left)),
+        "" if round(days_left) == 1 else "s",
     ),
-    u"Only {} days until election day! Make sure you're registered to vote: https://www.vote.org/register-to-vote/".format(
-        humanize.intcomma(days_left_vote),
+    u"Only {} hour{} until Election Day! Are you registered to vote? https://www.vote.org/register-to-vote/".format(
+        humanize.intcomma(hours_left_vote),
+        "" if hours_left_vote == 1 else "s",
     ),
-    u"There are {} days until election day, but don't wait until then. Vote early! https://www.vote.org/early-voting-calendar/".format(
-        humanize.intcomma(days_left_vote),
+    u"There are {} hour{} until Election Day! Don't wait until then: some states still allow early voting. https://www.vote.org/early-voting-calendar/".format(
+        humanize.intcomma(hours_left_vote),
+        "" if hours_left_vote == 1 else "s",
     ),
     u"Loading new president…\n{}\n{:0.1f}% complete".format(
-        progress_bar(float(days_in) / total_days, 30),
-        (float(days_in) / total_days) * 100.0,
+        progress_bar(days_in / total_days, 30),
+        (days_in / total_days) * 100.0,
     )
 ]
 
