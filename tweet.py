@@ -23,17 +23,26 @@ if redis_url:
 
 inauguration_2017 = maya.when("2017-01-20T12:00-05:00").datetime()
 inauguration_2021 = maya.when("2021-01-20T12:00-05:00").datetime()
+march_1 = maya.when("2020-03-01T00:00-05:00").datetime()
 
 seconds_in_hour = (60 * 60)
 seconds_in_day = (24 * seconds_in_hour)
 now = maya.now().datetime()
 
 days_in = (now - inauguration_2017).total_seconds() / seconds_in_day
-days_left = (inauguration_2021 - now).total_seconds() / seconds_in_day
+march_day = (now - march_1).total_seconds() / seconds_in_day
 total_days = (inauguration_2021 - inauguration_2017).total_seconds() / seconds_in_day
 
 messages = [
-    u"Today is Election Day. Go vote!",
+    "Today is {}, March {}. Wear a mask, wash your hands, don't gather. Only {} of Trump left!".format(
+        now.strftime("%A"),
+        humanize.ordinal(round(march_day)),
+        humanize.naturaldelta(inauguration_2021, months=False, when=now),
+    ),
+    "Loading new president…\n{}\n{:0.1f}% complete".format(
+        progress_bar(days_in / total_days, 30),
+        (days_in / total_days) * 100.0,
+    )
 ]
 
 message = random.choice(messages)
