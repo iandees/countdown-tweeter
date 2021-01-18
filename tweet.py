@@ -29,20 +29,36 @@ seconds_in_hour = (60 * 60)
 seconds_in_day = (24 * seconds_in_hour)
 now = maya.now().datetime()
 
-days_in = (now - inauguration_2017).total_seconds() / seconds_in_day
+seconds_in = (now - inauguration_2017).total_seconds()
+total_seconds = (inauguration_2021 - inauguration_2017).total_seconds()
+hours_left = (inauguration_2021 - now).total_seconds() / seconds_in_hour
 march_day = (now - march_1).total_seconds() / seconds_in_day
-total_days = (inauguration_2021 - inauguration_2017).total_seconds() / seconds_in_day
+
+if hours_left < 6:
+    post_rate = 1.00
+elif hours_left < 12:
+    post_rate = 0.70
+elif hours_left < 24:
+    post_rate = 0.60
+elif hours_left < 36:
+    post_rate = 0.50
+else:
+    post_rate = 0.40
+
+should_post = random.random() < post_rate
 
 messages = [
-    "Today is {}, March {}. Wear a mask, wash your hands, don't gather. Only {} of Trump left!".format(
-        now.strftime("%A"),
-        humanize.ordinal(round(march_day)),
-        humanize.naturaldelta(inauguration_2021, months=False, when=now),
+    # "Today is {}, March {}. Wear a mask, wash your hands, don't gather. Only {} of Trump left!".format(
+    #     now.strftime("%A"),
+    #     humanize.ordinal(round(march_day)),
+    #     humanize.naturaldelta(inauguration_2021, months=False, when=now),
+    # ),
+    "Loading new president…\n{}\n{:0.1f}% complete.\n{} {} remaining".format(
+        progress_bar(seconds_in / total_seconds, 30),
+        (seconds_in / total_seconds) * 100.0,
+        round(hours_left),
+        'hour' if round(hours_left) == 1 else 'hours',
     ),
-    "Loading new president…\n{}\n{:0.1f}% complete".format(
-        progress_bar(days_in / total_days, 30),
-        (days_in / total_days) * 100.0,
-    )
 ]
 
 message = random.choice(messages)
