@@ -34,7 +34,9 @@ total_seconds = (inauguration_2021 - inauguration_2017).total_seconds()
 hours_left = (inauguration_2021 - now).total_seconds() / seconds_in_hour
 march_day = (now - march_1).total_seconds() / seconds_in_day
 
-if hours_left < 6:
+if hours_left < 0:
+    post_rate = 0.00
+elif hours_left < 6:
     post_rate = 1.00
 elif hours_left < 12:
     post_rate = 0.70
