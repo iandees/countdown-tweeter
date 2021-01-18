@@ -47,6 +47,10 @@ else:
 
 should_post = random.random() < post_rate
 
+if not should_post:
+    logging.info("Skipping posting because post_rate=%0.2f", post_rate)
+    return
+
 messages = [
     # "Today is {}, March {}. Wear a mask, wash your hands, don't gather. Only {} of Trump left!".format(
     #     now.strftime("%A"),
