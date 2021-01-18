@@ -59,7 +59,7 @@ messages = [
     #     humanize.ordinal(round(march_day)),
     #     humanize.naturaldelta(inauguration_2021, months=False, when=now),
     # ),
-    "Loading new president…\n{}\n{:0.1f}% complete.\n{} {} remaining".format(
+    "Loading new president…\n{}\n{:0.3f}% complete.\n{} {} remaining".format(
         progress_bar(seconds_in / total_seconds, 30),
         (seconds_in / total_seconds) * 100.0,
         round(hours_left),
