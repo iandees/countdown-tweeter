@@ -41,13 +41,13 @@ if hours_left < 0:
 elif hours_left < 1:
     post_rate = 1.00
 elif hours_left < 3:
-    post_rate = 0.40
+    post_rate = 0.60
 elif hours_left < 6:
     post_rate = 0.30
 elif hours_left < 12:
-    post_rate = 0.20
+    post_rate = 0.30
 else:
-    post_rate = 0.10
+    post_rate = 0.25
 
 should_post = random.random() < post_rate
 
