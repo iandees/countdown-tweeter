@@ -25,27 +25,29 @@ inauguration_2017 = maya.when("2017-01-20T12:00-05:00").datetime()
 inauguration_2021 = maya.when("2021-01-20T12:00-05:00").datetime()
 march_1 = maya.when("2020-03-01T00:00-05:00").datetime()
 
-seconds_in_hour = (60 * 60)
+seconds_in_minute = 60
+seconds_in_hour = (60 * seconds_in_minute)
 seconds_in_day = (24 * seconds_in_hour)
 now = maya.now().datetime()
 
 seconds_in = (now - inauguration_2017).total_seconds()
 total_seconds = (inauguration_2021 - inauguration_2017).total_seconds()
 hours_left = (inauguration_2021 - now).total_seconds() / seconds_in_hour
+minutes_left = (inauguration_2021 - now).total_seconds() / seconds_in_minute
 march_day = (now - march_1).total_seconds() / seconds_in_day
 
 if hours_left < 0:
     post_rate = 0.00
-elif hours_left < 6:
+elif hours_left < 1:
     post_rate = 1.00
-elif hours_left < 12:
-    post_rate = 0.70
-elif hours_left < 24:
-    post_rate = 0.60
-elif hours_left < 36:
-    post_rate = 0.50
-else:
+elif hours_left < 3:
     post_rate = 0.40
+elif hours_left < 6:
+    post_rate = 0.30
+elif hours_left < 12:
+    post_rate = 0.20
+else:
+    post_rate = 0.10
 
 should_post = random.random() < post_rate
 
@@ -59,11 +61,11 @@ messages = [
     #     humanize.ordinal(round(march_day)),
     #     humanize.naturaldelta(inauguration_2021, months=False, when=now),
     # ),
-    "Loading new president…\n{}\n{:0.3f}% complete.\n{} {} remaining".format(
+    "Loading new president…\n{}\n{:0.4f}% complete.\n{} {} remaining".format(
         progress_bar(seconds_in / total_seconds, 30),
         (seconds_in / total_seconds) * 100.0,
-        round(hours_left),
-        'hour' if round(hours_left) == 1 else 'hours',
+        round(minutes_left),
+        'minute' if round(minutes_left) == 1 else 'minutes',
     ),
 ]
 
